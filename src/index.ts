@@ -2,6 +2,8 @@ import {
   EskizAuthTokenRes,
   EskizAuthUserRes,
   EskizSmsOptions,
+  EskizSmsSendBatchPayload,
+  EskizSmsSendBatchRes,
   EskizSmsSendPayload,
   EskizSmsSendRes,
 } from "./types";
@@ -15,7 +17,8 @@ import axios, {
 } from "axios";
 
 export class EskizSms {
-  public options: Required<EskizSmsOptions>;
+  public options: Required<Omit<EskizSmsOptions, "callback_url">> &
+    Pick<EskizSmsOptions, "callback_url">;
   private _token: string | null = null;
   public get token(): string | null {
     return this._token;
@@ -29,6 +32,7 @@ export class EskizSms {
     this.options = {
       baseUrl: options?.baseUrl || "https://notify.eskiz.uz",
       tokenEnvKey: options?.tokenEnvKey || "ESKIZSMS_ACCESS_TOKEN",
+      callback_url: options?.callback_url,
       envFile: options?.envFile || path.join(process.cwd(), ".env"),
       from: options?.from || "4546",
       email: options.email,
@@ -126,6 +130,22 @@ export class EskizSms {
   ): Promise<AxiosResponse<EskizSmsSendRes>> {
     return this.api.post<EskizSmsSendRes>("api/message/sms/send", {
       from: this.options.from,
+      callback_url: this.options?.callback_url,
+      ...payload,
+    });
+  }
+
+  /**
+   * Send batch SMS
+   * @param {EskizSmsSendBatchPayload} payload
+   * @returns {Promise<AxiosResponse<EskizSmsSendBatchRes>>}
+   */
+  public sendBatch(
+    payload: EskizSmsSendBatchPayload,
+  ): Promise<AxiosResponse<EskizSmsSendBatchRes>> {
+    return this.api.post<EskizSmsSendBatchRes>("api/message/sms/send-batch", {
+      from: this.options.from,
+      callback_url: this.options?.callback_url,
       ...payload,
     });
   }

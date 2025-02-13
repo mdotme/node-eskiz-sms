@@ -28,6 +28,11 @@ export interface EskizSmsOptions {
   from?: string;
 
   /**
+   * Callback url to receive message info.
+   */
+  callback_url?: string;
+
+  /**
    * Env Key for saving token on env file until expiration.
    * @example (default) ESKIZSMS_ACCESS_TOKEN
    */

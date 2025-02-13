@@ -19,6 +19,8 @@ const sms = new EskizSms({
   envFile: envPath,
 });
 
+const testPhone = process.env.ESKIZSMS_TEST_PHONE as string;
+
 describe("EskizSms", () => {
   describe("Init & Auth", () => {
     it("should not have token", () => {
@@ -60,10 +62,31 @@ describe("EskizSms", () => {
     it("should send SMS", () => {
       expect(
         sms.send({
-          mobile_phone: process.env.ESKIZSMS_TEST_PHONE as string,
+          mobile_phone: testPhone,
           message: "This is test from Eskiz",
         }),
       ).resolves.toBeTruthy();
     });
+
+    // Eskiz 403 rejection. Insufficient documentation.
+    // it("should send batch SMS", () => {
+    //   expect(
+    //     sms.sendBatch({
+    //       dispatch_id: 123,
+    //       messages: [
+    //         {
+    //           to: parseInt(testPhone),
+    //           text: "eto test",
+    //           user_sms_id: randomUUID(),
+    //         },
+    //         {
+    //           to: parseInt(testPhone),
+    //           text: "eto test",
+    //           user_sms_id: randomUUID(),
+    //         },
+    //       ],
+    //     }),
+    //   ).resolves.toBeTruthy();
+    // });
   });
 });
