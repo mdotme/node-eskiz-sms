@@ -103,9 +103,9 @@ export class EskizSms {
 
   /**
    * Returns current auth user
-   * @returns Promise<EskizAuthTokenRes>
+   * @returns {Promise<AxiosResponse<EskizAuthTokenRes>>}
    **/
-  public getAuthUser() {
+  public getAuthUser(): Promise<AxiosResponse<EskizAuthUserRes>> {
     return this.api<EskizAuthUserRes>("api/auth/user");
   }
 }
