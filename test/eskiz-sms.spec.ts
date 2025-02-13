@@ -28,5 +28,13 @@ describe("EskizSms", () => {
     it("should have token", () => {
       expect(sms.token).not.toBeNull();
     });
+
+    it("process.env[token] should be same as token", () => {
+      expect(process.env[sms.options.tokenEnvKey]).toBe(sms.token);
+    });
+
+    it("should return auth user", () => {
+      expect(sms.getAuthUser()).resolves.toBeTruthy();
+    });
   });
 });
