@@ -5,7 +5,8 @@
     "commitMessage": "chore: release v${version}",
     "tag": true,
     "tagName": "v${version}",
-    "push": true
+    "push": true,
+    "pushRepo": "https://github.com/mdotme/node-eskiz-sms.git"
   },
   "github": {
     "release": true,
