@@ -46,3 +46,28 @@ export interface EskizSmsSendBatchRes {
   message: string;
   status: EskizMessageStatus[];
 }
+
+export interface EskizSmsSendGlobalPayload
+  extends Pick<EskizSmsPayloadCore, "callback_url"> {
+  /**
+   * International mobile phone number. Should be string with only numbers.
+   * @example 1234567891011
+   */
+  mobile_phone: string;
+
+  /**
+   * Country code ISO A-2 format.
+   * @example US
+   * @see https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+   */
+  country_code: string;
+
+  /**
+   * Unicode to send message in cryllic.
+   * 1 for enable
+   * @example (default) 0
+   */
+  unicode?: 1 | 0;
+
+  message: string;
+}

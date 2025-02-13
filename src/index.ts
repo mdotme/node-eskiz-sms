@@ -4,6 +4,7 @@ import {
   EskizSmsOptions,
   EskizSmsSendBatchPayload,
   EskizSmsSendBatchRes,
+  EskizSmsSendGlobalPayload,
   EskizSmsSendPayload,
   EskizSmsSendRes,
 } from "./types";
@@ -145,6 +146,19 @@ export class EskizSms {
   ): Promise<AxiosResponse<EskizSmsSendBatchRes>> {
     return this.api.post<EskizSmsSendBatchRes>("api/message/sms/send-batch", {
       from: this.options.from,
+      callback_url: this.options?.callback_url,
+      ...payload,
+    });
+  }
+
+  /**
+   * Send batch SMS
+   * @param {EskizSmsSendGlobalPayload} payload
+   */
+  public sendGlobal<T = unknown>(
+    payload: EskizSmsSendGlobalPayload,
+  ): Promise<AxiosResponse<T>> {
+    return this.api.post<T>("api/message/sms/send-global", {
       callback_url: this.options?.callback_url,
       ...payload,
     });
