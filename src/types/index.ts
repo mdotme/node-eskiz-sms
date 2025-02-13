@@ -1,4 +1,6 @@
 export * from "./auth";
+export * from "./sms";
+export * from "./message-status.enum";
 
 /**
  * Options for configuring the EskizSms class.
@@ -17,6 +19,13 @@ export interface EskizSmsOptions {
    * @see https://my.eskiz.uz/sms/settings
    */
   password: string;
+
+  /**
+   * From aka Nickname.
+   * @example (default) 4546
+   *
+   */
+  from?: string;
 
   /**
    * Env Key for saving token on env file until expiration.

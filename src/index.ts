@@ -1,4 +1,10 @@
-import { EskizAuthTokenRes, EskizAuthUserRes, EskizSmsOptions } from "./types";
+import {
+  EskizAuthTokenRes,
+  EskizAuthUserRes,
+  EskizSmsOptions,
+  EskizSmsSendPayload,
+  EskizSmsSendRes,
+} from "./types";
 import { config } from "dotenv";
 import { saveToken } from "./utils/save-token";
 import * as path from "path";
@@ -24,6 +30,7 @@ export class EskizSms {
       baseUrl: options?.baseUrl || "https://notify.eskiz.uz",
       tokenEnvKey: options?.tokenEnvKey || "ESKIZSMS_ACCESS_TOKEN",
       envFile: options?.envFile || path.join(process.cwd(), ".env"),
+      from: options?.from || "4546",
       email: options.email,
       password: options.password,
     };
@@ -107,5 +114,19 @@ export class EskizSms {
    **/
   public getAuthUser(): Promise<AxiosResponse<EskizAuthUserRes>> {
     return this.api<EskizAuthUserRes>("api/auth/user");
+  }
+
+  /**
+   * Send local (Uzbekistan) SMS
+   * @param {EskizSmsSendPayload} payload
+   * @returns {Promise<AxiosResponse<EskizSmsSend>>}
+   */
+  public send(
+    payload: EskizSmsSendPayload,
+  ): Promise<AxiosResponse<EskizSmsSendRes>> {
+    return this.api.post<EskizSmsSendRes>("api/message/sms/send", {
+      from: this.options.from,
+      ...payload,
+    });
   }
 }
