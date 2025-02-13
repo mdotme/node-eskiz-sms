@@ -34,6 +34,17 @@ jobs:
       - name: Generate CHANGELOG
         run: pnpm conventional-changelog -p conventionalcommits -i CHANGELOG.md -s
 
+      - name: Configure Git
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and Push Changelog
+        run: |
+          git add CHANGELOG.md
+          git commit -m "chore(release): update CHANGELOG"
+          git push
+
       - name: Build the Package
         run: pnpm build
 
@@ -42,6 +53,8 @@ jobs:
         with:
           name: dist
           path: dist/
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     needs: test_and_build
