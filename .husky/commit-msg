@@ -1,4 +1,10 @@
-#!/usr/bin/env sh
+#!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
+
+# Skip in CI
+if [ "$CI" = "true" ]; then
+  echo "Skipping commit-msg hook in CI"
+  exit 0
+fi
 
 "pnpm commitlint --edit $1"
