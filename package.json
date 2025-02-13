@@ -1,6 +1,6 @@
 {
   "name": "eskiz-sms",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Nodejs package for eskiz.uz SMS service",
   "main": "dist/index.js",
   "scripts": {
@@ -20,6 +20,9 @@
   ],
   "author": "Manuchehr Raupov",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
