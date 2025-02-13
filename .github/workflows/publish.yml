@@ -8,7 +8,6 @@ on:
 jobs:
   test_and_build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -39,11 +38,14 @@ jobs:
           git config --local user.name "GitHub Actions"
           git config --local user.email "github-actions@github.com"
 
+      - name: Pull Latest Changes
+        run: git pull origin master --rebase
+
       - name: Commit and Push Changelog
         run: |
           git add CHANGELOG.md
-          git commit -m "chore(release): update CHANGELOG" || echo "No changes to commit"
-          git push
+          git diff --cached --quiet || git commit -m "chore(release): update CHANGELOG"
+          git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -51,7 +53,7 @@ jobs:
         run: pnpm build
 
       - name: Archive Build Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: dist
           path: dist/
@@ -59,7 +61,6 @@ jobs:
   release:
     needs: test_and_build
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -77,7 +78,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run release-it
-        run: pnpm release-it --ci
+        run: |
+          git pull origin master --rebase || true
+          pnpm release-it --ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
