@@ -1,8 +1,12 @@
 import { EskizAuthTokenRes, EskizAuthUserRes, EskizSmsOptions } from "./types";
-import { $Fetch, ofetch } from "ofetch";
 import { config } from "dotenv";
 import { saveToken } from "./utils/save-token";
 import * as path from "path";
+import axios, {
+  AxiosInstance,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
 
 export class EskizSms {
   public options: Required<EskizSmsOptions>;
@@ -11,7 +15,7 @@ export class EskizSms {
     return this._token;
   }
 
-  private api: $Fetch;
+  private api: AxiosInstance;
   private refreshing = false;
   private refreshSubscribers: ((token: string) => void)[] = [];
 
@@ -26,15 +30,48 @@ export class EskizSms {
     config({
       path: this.options.envFile,
     });
-    this.api = ofetch.create({
+    this.api = axios.create({
       baseURL: this.options.baseUrl,
-
-      onRequest: ({ options }) => {
-        if (this._token) {
-          options.headers.append("Authorization", `Bearer ${this._token}`);
-        }
-      },
     });
+    this.api.interceptors.request.use((config) => {
+      if (this._token) {
+        config.headers.Authorization = `Bearer ${this._token}`;
+      }
+      return config;
+    });
+
+    this.api.interceptors.response.use(
+      (res) => res,
+      async (error) => {
+        const { response } = error as unknown as {
+          config: InternalAxiosRequestConfig;
+          response: AxiosResponse;
+        };
+        if (response.status === 401) {
+          if (!this.refreshing) {
+            this.refreshing = true;
+            try {
+              const { data } = await this.login();
+              this.setToken(data.token);
+              this.refreshSubscribers.forEach((cb) => cb(data.token));
+              this.refreshSubscribers = [];
+            } catch (err) {
+              return Promise.reject(err as Error);
+            } finally {
+              this.refreshing = false;
+            }
+          }
+
+          return new Promise((res) => {
+            this.refreshSubscribers.push((token) => {
+              response.config.headers.Authorization = `Bearer ${token}`;
+              res(this.api(response.config));
+            });
+          });
+        }
+        return Promise.reject(error as Error);
+      },
+    );
   }
 
   private setToken(token: string) {
@@ -44,18 +81,15 @@ export class EskizSms {
   }
 
   private async login() {
-    const res = await this.api<EskizAuthTokenRes>("api/auth/login", {
-      method: "POST",
-      body: {
-        email: this.options.email,
-        password: this.options.password,
-      },
+    const { data } = await this.api.post<EskizAuthTokenRes>("api/auth/login", {
+      email: this.options.email,
+      password: this.options.password,
     });
-    this.setToken(res.data.token);
-    return res;
+    this.setToken(data.data.token);
+    return data;
   }
 
-  async init() {
+  public async init() {
     if (this._token) return this;
 
     if (process.env?.[this.options.tokenEnvKey]) {

@@ -37,9 +37,8 @@
     "typescript-eslint": "^8.24.0"
   },
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "ofetch": "^1.4.1",
-    "undici": "^7.3.0"
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7"
   },
   "jest": {
     "moduleFileExtensions": [
