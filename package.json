@@ -1,5 +1,5 @@
 {
-  "name": "node-eskiz-sms",
+  "name": "eskiz-sms",
   "version": "1.0.0",
   "description": "Nodejs package for eskiz.uz SMS service",
   "main": "dist/index.js",
@@ -56,5 +56,13 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mdotme/node-eskiz-sms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mdotme/node-eskiz-sms/issues"
+  },
+  "homepage": "https://github.com/mdotme/node-eskiz-sms#readme"
 }
