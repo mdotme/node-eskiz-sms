@@ -44,6 +44,8 @@ jobs:
           git add CHANGELOG.md
           git commit -m "chore(release): update CHANGELOG"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the Package
         run: pnpm build
@@ -53,8 +55,6 @@ jobs:
         with:
           name: dist
           path: dist/
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     needs: test_and_build
