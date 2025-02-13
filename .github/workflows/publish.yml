@@ -44,7 +44,7 @@ jobs:
       - name: Commit and Push Changelog
         run: |
           git add CHANGELOG.md
-          git commit -m "chore(release): update CHANGELOG"
+          git commit -m "chore(release): update CHANGELOG" || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
