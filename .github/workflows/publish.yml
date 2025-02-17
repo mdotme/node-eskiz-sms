@@ -48,13 +48,13 @@ jobs:
 
       - name: Build the Package
         run: pnpm build
-
-      - name: Archive Build Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
+      #
+      # - name: Archive Build Artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: dist
+      #     path: dist/
+      #
       - name: Run release-it
         run: |
           git pull origin master --rebase || true

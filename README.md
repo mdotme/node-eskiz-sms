@@ -18,11 +18,11 @@ pnpm add eskiz-sms
 ## Usage
 
 ```typescript
-import { EskizSms } from "eskiz-sms";
+import { EskizSms } from 'eskiz-sms';
 
 const sms = new EskizSms({
-  email: "your-email@example.com",
-  password: "your-password",
+  email: 'your-email@example.com',
+  password: 'your-password',
 });
 
 // !IMPORTANT!
@@ -30,8 +30,8 @@ await sms.init();
 
 sms
   .send({
-    mobile_phone: "998901234567",
-    message: "Hello from Eskiz SMS!",
+    mobile_phone: '998901234567',
+    message: 'Hello from Eskiz SMS!',
   })
   .then((response) => {
     console.log(response);
@@ -39,6 +39,17 @@ sms
   .catch((error) => {
     console.error(error);
   });
+```
+
+#### Types
+
+```typescript
+import { EskizSmsSendPayload } from 'eskiz-sms';
+
+const message: EskizSmsSendPayload = {
+  message: 'Hello, World!',
+  mobile_phone: '905555555555',
+};
 ```
 
 For more documentation, please visit [Eskiz API documentation](https://documenter.getpostman.com/view/663428/RzfmES4z?version=latest).
@@ -60,13 +71,15 @@ Guidelines for contributing to the project.
 - Package manager: [pnpm](https://pnpm.io/)
 - Consider copying `.env.test` to `.env.test.local`
 
+See the [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+
 ## License
 
 This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-Manuchehr - [contact@manuchehr.me](mailto:contact@manuchehr.me)
+Manuchehr - [manuchehr.me](https://manuchehr.me)
 
 Project Link: [https://github.com/mdotme/node-eskiz-sms](https://github.com/mdotme/node-eskiz-sms)
 
