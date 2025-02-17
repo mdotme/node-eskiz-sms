@@ -1,5 +1,5 @@
-import { UUID } from 'node:crypto';
-import { EskizMessageStatus } from './message-status.enum';
+import { UUID } from "node:crypto";
+import { EskizMessageStatus } from "./message-status.enum";
 
 interface EskizSmsPayloadCore {
   /**
@@ -48,7 +48,7 @@ export interface EskizSmsSendBatchRes {
 }
 
 export interface EskizSmsSendGlobalPayload
-  extends Pick<EskizSmsPayloadCore, 'callback_url'> {
+  extends Pick<EskizSmsPayloadCore, "callback_url"> {
   /**
    * International mobile phone number. Should be string with only numbers.
    * @example 1234567891011
