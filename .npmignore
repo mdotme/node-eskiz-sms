@@ -5,6 +5,7 @@ eslint.config.mjs
 package-lock.json
 .eslintignore
 tsconfig.json
+tsconfig.build.json
 .prettierrc
 .github
 
@@ -12,3 +13,5 @@ tsconfig.json
 npm-debug.log
 .DS_Store
 .release-it.json
+.env.test
+.env.local
