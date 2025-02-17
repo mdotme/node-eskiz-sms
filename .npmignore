@@ -1,0 +1,14 @@
+src
+test
+
+eslint.config.mjs
+package-lock.json
+.eslintignore
+tsconfig.json
+.prettierrc
+.github
+
+# misc
+npm-debug.log
+.DS_Store
+.release-it.json
