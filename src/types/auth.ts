@@ -4,11 +4,11 @@ export interface EskizAuthLoginPayload {
 }
 
 export interface EskizAuthTokenRes {
-  message: string | "token_generated";
+  message: string | 'token_generated';
   data: {
     token: string;
   };
-  token_type: string | "bearer";
+  token_type: string | 'bearer';
 }
 
 export interface EskizAuthUser {
@@ -18,14 +18,14 @@ export interface EskizAuthUser {
   name: string;
   email: string;
   password: string;
-  role: string | "user";
-  status: string | "active";
+  role: string | 'user';
+  status: string | 'active';
   is_vip: boolean;
   balance: number;
 }
 
 export interface EskizAuthUserRes {
-  status: string | "success";
+  status: string | 'success';
   data: EskizAuthUser;
   id: null;
 }

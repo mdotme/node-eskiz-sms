@@ -7,19 +7,19 @@ import {
   EskizSmsSendGlobalPayload,
   EskizSmsSendPayload,
   EskizSmsSendRes,
-} from "./types";
-import { config } from "dotenv";
-import { saveToken } from "./utils/save-token";
-import * as path from "path";
+} from './types';
+import { config } from 'dotenv';
+import { saveToken } from './utils/save-token';
+import * as path from 'path';
 import axios, {
   AxiosInstance,
   AxiosResponse,
   InternalAxiosRequestConfig,
-} from "axios";
+} from 'axios';
 
 export class EskizSms {
-  public options: Required<Omit<EskizSmsOptions, "callback_url">> &
-    Pick<EskizSmsOptions, "callback_url">;
+  public options: Required<Omit<EskizSmsOptions, 'callback_url'>> &
+    Pick<EskizSmsOptions, 'callback_url'>;
   private _token: string | null = null;
   public get token(): string | null {
     return this._token;
@@ -31,11 +31,11 @@ export class EskizSms {
 
   constructor(options: EskizSmsOptions) {
     this.options = {
-      baseUrl: options?.baseUrl || "https://notify.eskiz.uz",
-      tokenEnvKey: options?.tokenEnvKey || "ESKIZSMS_ACCESS_TOKEN",
+      baseUrl: options?.baseUrl || 'https://notify.eskiz.uz',
+      tokenEnvKey: options?.tokenEnvKey || 'ESKIZSMS_ACCESS_TOKEN',
       callback_url: options?.callback_url,
-      envFile: options?.envFile || path.join(process.cwd(), ".env"),
-      from: options?.from || "4546",
+      envFile: options?.envFile || path.join(process.cwd(), '.env'),
+      from: options?.from || '4546',
       email: options.email,
       password: options.password,
     };
@@ -93,7 +93,7 @@ export class EskizSms {
   }
 
   private async login() {
-    const { data } = await this.api.post<EskizAuthTokenRes>("api/auth/login", {
+    const { data } = await this.api.post<EskizAuthTokenRes>('api/auth/login', {
       email: this.options.email,
       password: this.options.password,
     });
@@ -118,7 +118,7 @@ export class EskizSms {
    * @returns {Promise<AxiosResponse<EskizAuthTokenRes>>}
    **/
   public getAuthUser(): Promise<AxiosResponse<EskizAuthUserRes>> {
-    return this.api<EskizAuthUserRes>("api/auth/user");
+    return this.api<EskizAuthUserRes>('api/auth/user');
   }
 
   /**
@@ -129,7 +129,7 @@ export class EskizSms {
   public send(
     payload: EskizSmsSendPayload,
   ): Promise<AxiosResponse<EskizSmsSendRes>> {
-    return this.api.post<EskizSmsSendRes>("api/message/sms/send", {
+    return this.api.post<EskizSmsSendRes>('api/message/sms/send', {
       from: this.options.from,
       callback_url: this.options?.callback_url,
       ...payload,
@@ -144,7 +144,7 @@ export class EskizSms {
   public sendBatch(
     payload: EskizSmsSendBatchPayload,
   ): Promise<AxiosResponse<EskizSmsSendBatchRes>> {
-    return this.api.post<EskizSmsSendBatchRes>("api/message/sms/send-batch", {
+    return this.api.post<EskizSmsSendBatchRes>('api/message/sms/send-batch', {
       from: this.options.from,
       callback_url: this.options?.callback_url,
       ...payload,
@@ -158,7 +158,7 @@ export class EskizSms {
   public sendGlobal<T = unknown>(
     payload: EskizSmsSendGlobalPayload,
   ): Promise<AxiosResponse<T>> {
-    return this.api.post<T>("api/message/sms/send-global", {
+    return this.api.post<T>('api/message/sms/send-global', {
       callback_url: this.options?.callback_url,
       ...payload,
     });
