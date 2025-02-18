@@ -31,7 +31,7 @@ jobs:
         run: pnpm type-check
 
       - name: Generate CHANGELOG
-        run: pnpm conventional-changelog -p conventionalcommits -i CHANGELOG.md -s
+        run: npx auto-changelog --commit-limit false -o CHANGELOG.md
 
       - name: Configure Git
         run: |

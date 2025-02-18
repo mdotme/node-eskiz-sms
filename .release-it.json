@@ -18,13 +18,7 @@
   },
   "hooks": {
     "before:init": "git config --local user.name 'GitHub Actions' && git config --local user.email 'github-actions@github.com'",
-    "after:bump": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s || echo 'No previous changelog found'",
+    "after:bump": "npx auto-changelog --commit-limit false -o CHANGELOG.md",
     "after:release": "echo Successfully released v${version}!"
-  },
-  "plugins": {
-    "@release-it/conventional-changelog": {
-      "preset": "conventionalcommits",
-      "infile": "CHANGELOG.md"
-    }
   }
 }
