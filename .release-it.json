@@ -1,6 +1,5 @@
 {
   "git": {
-    "changelog": "npx auto-changelog --stdout --commit-limit false --unreleased",
     "requireCleanWorkingDir": true,
     "commit": true,
     "commitMessage": "chore: release v${version}",
@@ -17,8 +16,6 @@
     "publish": true
   },
   "hooks": {
-    "before:init": "git config --local user.name 'GitHub Actions' && git config --local user.email 'github-actions@github.com'",
-    "after:bump": "npx auto-changelog --commit-limit false -o CHANGELOG.md",
     "after:release": "echo Successfully released v${version}!"
   }
 }
