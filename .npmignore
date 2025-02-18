@@ -1,5 +1,6 @@
 src
 test
+.husky
 
 eslint.config.mjs
 package-lock.json

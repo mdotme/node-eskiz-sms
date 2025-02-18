@@ -1,0 +1,6 @@
+if [ "$CI" = "true" ]; then
+  echo "Skipping pre-commit hook in CI"
+  exit 0
+fi
+
+git pull origin master
