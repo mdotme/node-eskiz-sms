@@ -16,3 +16,4 @@ npm-debug.log
 .release-it.json
 .env.test
 .env.local
+.env.test.local
