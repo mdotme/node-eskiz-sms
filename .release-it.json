@@ -1,5 +1,6 @@
 {
   "git": {
+    "changelog": "npx auto-changelog --stdout --commit-limit false --unreleased",
     "requireCleanWorkingDir": true,
     "commit": true,
     "commitMessage": "chore: release v${version}",
