@@ -29,32 +29,26 @@ jobs:
 
       - name: Run type-check
         run: pnpm type-check
-
-      - name: Generate CHANGELOG
-        run: npx auto-changelog --commit-limit false -o CHANGELOG.md
-
+      #
+      # - name: Generate CHANGELOG
+      #   run: npx auto-changelog --commit-limit false -o CHANGELOG.md
+      #
       - name: Configure Git
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "github-actions@github.com"
-
-      - name: Commit and Push Changelog
-        run: |
-          git add CHANGELOG.md
-          git diff --cached --quiet || git commit -m "chore(release): update CHANGELOG"
-          git push origin master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      #
+      # - name: Commit and Push Changelog
+      #   run: |
+      #     git add CHANGELOG.md
+      #     git diff --cached --quiet || git commit -m "chore(release): update CHANGELOG"
+      #     git push origin master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #
       - name: Build the Package
         run: pnpm build
-      #
-      # - name: Archive Build Artifacts
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: dist
-      #     path: dist/
-      #
+
       - name: Run release-it
         run: |
           git pull origin master --rebase || true

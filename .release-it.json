@@ -1,4 +1,5 @@
 {
+  "$schema": "https://unpkg.com/release-it@18/schema/release-it.json",
   "git": {
     "requireCleanWorkingDir": true,
     "commit": true,
@@ -17,5 +18,18 @@
   },
   "hooks": {
     "after:release": "echo Successfully released v${version}!"
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          { "type": "feat", "section": "Features" },
+          { "type": "fix", "section": "Bug Fixes" },
+          { "type": "chore", "hidden": true }
+        ]
+      },
+      "infile": "CHANGELOG.md"
+    }
   }
 }
