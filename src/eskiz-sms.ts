@@ -1,6 +1,7 @@
 import {
   EskizAuthTokenRes,
   EskizAuthUserRes,
+  EskizReportsBalanceRes,
   EskizSmsOptions,
   EskizSmsSendBatchPayload,
   EskizSmsSendBatchRes,
@@ -162,5 +163,13 @@ export class EskizSms {
       callback_url: this.options?.callback_url,
       ...payload,
     });
+  }
+
+  /**
+   * Get account balance
+   * @returns {Promise<AxiosResponse<EskizReportsBalanceRes>>}
+   */
+  public getBalance(): Promise<AxiosResponse<EskizReportsBalanceRes>> {
+    return this.api.get<EskizReportsBalanceRes>("api/user/get-limit");
   }
 }

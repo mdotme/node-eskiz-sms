@@ -89,4 +89,11 @@ describe("EskizSms", () => {
     //   ).resolves.toBeTruthy();
     // });
   });
+
+  describe("Reports", () => {
+    it("should return balance", async () => {
+      const res = await sms.getBalance();
+      expect(res?.data?.data?.balance).toEqual(expect.any(Number));
+    });
+  });
 });
