@@ -2,6 +2,8 @@ import {
   EskizAuthTokenRes,
   EskizAuthUserRes,
   EskizReportsBalanceRes,
+  EskizReportsByCompaniesPayload,
+  EskizReportsByCompaniesRes,
   EskizReportsMonthlyRes,
   EskizReportsSmsPayload,
   EskizReportsSmsRes,
@@ -206,5 +208,20 @@ export class EskizSms {
     return this.api.get<EskizReportsMonthlyRes>("api/report/total-by-month", {
       params: { year },
     });
+  }
+
+  /**
+   * Get report of sent SMS by copmanies.
+   * @param {EskizReportsByCompaniesPayload} payload
+   * @returns {Promise<AxiosResponse<EskizReportsByCompaniesRes>>}
+   * @see https://documenter.getpostman.com/view/663428/RzfmES4z?version=latest#e4d86012-c586-4785-a362-f4d7300b28cd
+   */
+  public getReportByCompanies(
+    payload: EskizReportsByCompaniesPayload,
+  ): Promise<AxiosResponse<EskizReportsByCompaniesRes>> {
+    return this.api.post<EskizReportsByCompaniesRes>(
+      "api/report/total-by-smsc",
+      payload,
+    );
   }
 }

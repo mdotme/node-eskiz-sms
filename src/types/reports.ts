@@ -1,4 +1,5 @@
 import { EskizMessageStatus } from "./message-status.enum";
+import { EskizSmsCompany } from "./sms-company.enum";
 
 export interface EskizReportsBalanceRes {
   data: {
@@ -48,8 +49,7 @@ export interface EskizReportsSmsRes {
   id: null | number;
 }
 
-// Monthly report
-export interface EskizReportsMonthlyItem {
+export interface EskizReportsStatItem {
   year: number;
 
   /**
@@ -90,5 +90,21 @@ export interface EskizReportsMonthlyItem {
 }
 
 export interface EskizReportsMonthlyRes {
-  data: EskizReportsMonthlyItem[];
+  data: EskizReportsStatItem[];
+}
+
+export interface EskizReportsStatCompanyItem extends EskizReportsStatItem {
+  /**
+   * SMS Company
+   */
+  smsc_id: EskizSmsCompany;
+}
+
+export type EskizReportsByCompaniesPayload = Omit<
+  EskizReportsSmsPayload,
+  "is_global"
+>;
+
+export interface EskizReportsByCompaniesRes {
+  data: EskizReportsStatCompanyItem[];
 }

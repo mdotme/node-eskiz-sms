@@ -67,7 +67,6 @@ describe("EskizSms", () => {
         }),
       ).resolves.toBeTruthy();
     });
-
     // Eskiz 403 rejection. Insufficient documentation.
     // it("should send batch SMS", () => {
     //   expect(
@@ -110,6 +109,16 @@ describe("EskizSms", () => {
     it("should return monthly report list", () => {
       const date = new Date();
       expect(sms.getReportMonthly(date.getFullYear())).resolves.toBeTruthy();
+    });
+
+    it("should return report list by companies", () => {
+      const date = new Date();
+      expect(
+        sms.getReportByCompanies({
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+        }),
+      ).resolves.toBeTruthy();
     });
   });
 });

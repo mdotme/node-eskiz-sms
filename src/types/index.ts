@@ -1,6 +1,7 @@
 export * from "./auth";
 export * from "./sms";
 export * from "./message-status.enum";
+export * from "./sms-company.enum";
 export * from "./reports";
 
 /**
