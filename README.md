@@ -1,5 +1,7 @@
 # Eskiz SMS Nodejs (Typescript) package
 
+🌐 Languages: [English](README.md) | [O'zbekcha](README.uz.md)
+
 Nodejs package for sending SMS using [Eskiz](https://eskiz.uz) SMS API.
 
 #### Features
@@ -18,11 +20,11 @@ pnpm add eskiz-sms
 ## Usage
 
 ```typescript
-import { EskizSms } from 'eskiz-sms';
+import { EskizSms } from "eskiz-sms";
 
 const sms = new EskizSms({
-  email: 'your-email@example.com',
-  password: 'your-password',
+  email: "your-email@example.com",
+  password: "your-password",
 });
 
 // !IMPORTANT!
@@ -30,8 +32,8 @@ await sms.init();
 
 sms
   .send({
-    mobile_phone: '998901234567',
-    message: 'Hello from Eskiz SMS!',
+    mobile_phone: "998901234567",
+    message: "Hello from Eskiz SMS!",
   })
   .then((response) => {
     console.log(response);
@@ -44,11 +46,11 @@ sms
 #### Types
 
 ```typescript
-import { EskizSmsSendPayload } from 'eskiz-sms';
+import { EskizSmsSendPayload } from "eskiz-sms";
 
 const message: EskizSmsSendPayload = {
-  message: 'Hello, World!',
-  mobile_phone: '905555555555',
+  message: "Hello, World!",
+  mobile_phone: "905555555555",
 };
 ```
 
@@ -61,8 +63,8 @@ Guidelines for contributing to the project.
 1. Fork the repository.
 2. Create a new branch (`git checkout -b feat/branch`).
 3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature-branch`).
+4. Commit your changes (`git commit -m 'feat: x method for doing y job'`).
+5. Push to the branch (`git push origin feat/branch`).
 6. Open a pull request.
 
 ### Development setup
