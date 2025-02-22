@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/mdotme/node-eskiz-sms/compare/v1.3.0...v1.4.0) (2025-02-22)
+
+### Features
+
+* monthly report method ([8932d99](https://github.com/mdotme/node-eskiz-sms/commit/8932d99ef2adbc4ffc808a3e561cdb73d4ab8232))
+* report list by companies method ([99cb55b](https://github.com/mdotme/node-eskiz-sms/commit/99cb55bd16809035e913f83d40bed6c034627fbc))
+
 ## [1.3.0](https://github.com/mdotme/node-eskiz-sms/compare/v1.2.0...v1.3.0) (2025-02-22)
 
 ### Features
