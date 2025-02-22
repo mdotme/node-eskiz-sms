@@ -120,16 +120,17 @@ export class EskizSms {
   /**
    * Returns current auth user
    * @returns {Promise<AxiosResponse<EskizAuthTokenRes>>}
+   * @see https://documenter.getpostman.com/view/663428/RzfmES4z?version=latest#63fbbb29-fd06-4ed4-9bef-0655f7ca502b
    **/
   public getAuthUser(): Promise<AxiosResponse<EskizAuthUserRes>> {
     return this.api<EskizAuthUserRes>("api/auth/user");
   }
 
-  // TODO: Need reference URLs for each method
   /**
    * Send local (Uzbekistan) SMS
    * @param {EskizSmsSendPayload} payload
    * @returns {Promise<AxiosResponse<EskizSmsSend>>}
+   * @see https://documenter.getpostman.com/view/663428/RzfmES4z?version=latest#2fb3b35a-9a44-45da-a312-6cdcc9bcc6c6
    */
   public send(
     payload: EskizSmsSendPayload,
@@ -145,6 +146,7 @@ export class EskizSms {
    * Send batch SMS
    * @param {EskizSmsSendBatchPayload} payload
    * @returns {Promise<AxiosResponse<EskizSmsSendBatchRes>>}
+   * @see https://documenter.getpostman.com/view/663428/RzfmES4z?version=latest#2d87082e-77a5-4614-81ed-22d8e033b4f2
    */
   public sendBatch(
     payload: EskizSmsSendBatchPayload,
@@ -157,8 +159,9 @@ export class EskizSms {
   }
 
   /**
-   * Send batch SMS
+   * Send global (international) SMS
    * @param {EskizSmsSendGlobalPayload} payload
+   * @see https://documenter.getpostman.com/view/663428/RzfmES4z?version=latest#b83b2d32-f6fc-48db-a205-700598ded36c
    */
   public sendGlobal<T = unknown>(
     payload: EskizSmsSendGlobalPayload,
@@ -172,6 +175,7 @@ export class EskizSms {
   /**
    * Get account balance
    * @returns {Promise<AxiosResponse<EskizReportsBalanceRes>>}
+   * @see https://documenter.getpostman.com/view/663428/RzfmES4z?version=latest#28a1bb52-4e92-4424-901e-a9de21bc6445
    */
   public getBalance(): Promise<AxiosResponse<EskizReportsBalanceRes>> {
     return this.api.get<EskizReportsBalanceRes>("api/user/get-limit");
@@ -181,6 +185,7 @@ export class EskizSms {
    * Get total report of sent sms
    * @param {EskizReportsSmsPayload} payload
    * @returns {Promise<AxiosResponse<EskizReportsSmsRes>>}
+   * @see https://documenter.getpostman.com/view/663428/RzfmES4z?version=latest#2ed280d4-3cea-4bc4-b9ce-9c816135ed3d
    */
   public getReportSms(
     payload: EskizReportsSmsPayload,
