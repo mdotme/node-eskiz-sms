@@ -2,6 +2,7 @@ import {
   EskizAuthTokenRes,
   EskizAuthUserRes,
   EskizReportsBalanceRes,
+  EskizReportsMonthlyRes,
   EskizReportsSmsPayload,
   EskizReportsSmsRes,
   EskizSmsOptions,
@@ -186,5 +187,19 @@ export class EskizSms {
   ): Promise<AxiosResponse<EskizReportsSmsRes>> {
     if (!("is_global" in payload)) payload.is_global = 0;
     return this.api.post<EskizReportsSmsRes>("/api/user/totals", payload);
+  }
+
+  /**
+   * Get "monthly" report with specified year for every month for this year. It's called monthly total in Eskiz.
+   * @param {number} year
+   * @returns {Promise<AxiosResponse<EskizReportsMonthlyRes>>}
+   * @see https://documenter.getpostman.com/view/663428/RzfmES4z?version=latest#40c1b650-819e-46ea-bf80-c0be48bea879
+   */
+  public getReportMonthly(
+    year: number,
+  ): Promise<AxiosResponse<EskizReportsMonthlyRes>> {
+    return this.api.get<EskizReportsMonthlyRes>("api/report/total-by-month", {
+      params: { year },
+    });
   }
 }

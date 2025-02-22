@@ -47,3 +47,48 @@ export interface EskizReportsSmsRes {
   data: EskizReportsSmsItem[];
   id: null | number;
 }
+
+// Monthly report
+export interface EskizReportsMonthlyItem {
+  year: number;
+
+  /**
+   * Starts with 1 (January)
+   * Max value is 12 (December)
+   */
+  month: number;
+
+  /**
+   * Count of ad type SMS
+   */
+  ad_parts: number;
+
+  /**
+   * Expenses of ad type SMS
+   */
+  ad_spent: number;
+
+  /**
+   * Count of service type SMS
+   */
+  parts: number;
+
+  /**
+   * Expenses of service type SMS
+   */
+  spent: number;
+
+  /**
+   * It's highly total count of sent SMS
+   */
+  total_parts: number;
+
+  /**
+   * It's highly sum of all sent SMS
+   */
+  total_spent: number;
+}
+
+export interface EskizReportsMonthlyRes {
+  data: EskizReportsMonthlyItem[];
+}

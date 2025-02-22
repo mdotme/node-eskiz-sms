@@ -106,5 +106,10 @@ describe("EskizSms", () => {
         }),
       ).resolves.toBeTruthy();
     });
+
+    it("should return monthly report list", () => {
+      const date = new Date();
+      expect(sms.getReportMonthly(date.getFullYear())).resolves.toBeTruthy();
+    });
   });
 });
