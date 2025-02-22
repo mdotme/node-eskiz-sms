@@ -2,6 +2,8 @@ import {
   EskizAuthTokenRes,
   EskizAuthUserRes,
   EskizReportsBalanceRes,
+  EskizReportsSmsPayload,
+  EskizReportsSmsRes,
   EskizSmsOptions,
   EskizSmsSendBatchPayload,
   EskizSmsSendBatchRes,
@@ -122,6 +124,7 @@ export class EskizSms {
     return this.api<EskizAuthUserRes>("api/auth/user");
   }
 
+  // TODO: Need reference URLs for each method
   /**
    * Send local (Uzbekistan) SMS
    * @param {EskizSmsSendPayload} payload
@@ -171,5 +174,17 @@ export class EskizSms {
    */
   public getBalance(): Promise<AxiosResponse<EskizReportsBalanceRes>> {
     return this.api.get<EskizReportsBalanceRes>("api/user/get-limit");
+  }
+
+  /**
+   * Get total report of sent sms
+   * @param {EskizReportsSmsPayload} payload
+   * @returns {Promise<AxiosResponse<EskizReportsSmsRes>>}
+   */
+  public getReportSms(
+    payload: EskizReportsSmsPayload,
+  ): Promise<AxiosResponse<EskizReportsSmsRes>> {
+    if (!("is_global" in payload)) payload.is_global = 0;
+    return this.api.post<EskizReportsSmsRes>("/api/user/totals", payload);
   }
 }

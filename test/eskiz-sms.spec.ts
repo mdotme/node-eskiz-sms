@@ -95,5 +95,16 @@ describe("EskizSms", () => {
       const res = await sms.getBalance();
       expect(res?.data?.data?.balance).toEqual(expect.any(Number));
     });
+
+    it("should return sms report list", () => {
+      const date = new Date();
+      expect(
+        sms.getReportSms({
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          is_global: 0,
+        }),
+      ).resolves.toBeTruthy();
+    });
   });
 });
