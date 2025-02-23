@@ -121,4 +121,24 @@ describe("EskizSms", () => {
       ).resolves.toBeTruthy();
     });
   });
+
+  describe("Templates", () => {
+    it("should fetch SMS templates", async () => {
+      const res = await sms.fetchTemplates();
+      expect(res).toBeTruthy();
+      expect(res.data).toHaveProperty("success", true);
+      expect(Array.isArray(res.data.result)).toBe(true);
+    }, 10000);
+  
+    it("each template should have required properties", async () => {
+      const res = await sms.fetchTemplates();
+      res.data.result.forEach((template) => {
+        expect(template).toHaveProperty("id");
+        expect(template).toHaveProperty("template");
+        expect(template).toHaveProperty("original_text");
+        expect(template).toHaveProperty("status");
+        expect(["moderation", "inproccess", "service", "reklama", "rejected"]).toContain(template.status);
+      });
+    }, 10000);
+  });
 });
