@@ -3,6 +3,7 @@ export * from "./sms";
 export * from "./message-status.enum";
 export * from "./sms-company.enum";
 export * from "./reports";
+export * from "./templates";
 
 /**
  * Options for configuring the EskizSms class.

@@ -13,6 +13,7 @@ import {
   EskizSmsSendGlobalPayload,
   EskizSmsSendPayload,
   EskizSmsSendRes,
+  EskizSmsTemplateListRes,
 } from "./types";
 import { config } from "dotenv";
 import { saveToken } from "./utils/save-token";
@@ -223,5 +224,13 @@ export class EskizSms {
       "api/report/total-by-smsc",
       payload,
     );
+  }
+
+  /**
+   * Fetch SMS templates
+   * @returns {Promise<AxiosResponse<EskizSmsTemplateListRes>>}
+   */
+  public fetchTemplates(): Promise<AxiosResponse<EskizSmsTemplateListRes>> {
+    return this.api.get<EskizSmsTemplateListRes>("api/user/templates");
   }
 }
