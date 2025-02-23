@@ -1,6 +1,6 @@
 {
   "name": "eskiz-sms",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Nodejs package for eskiz.uz SMS service",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

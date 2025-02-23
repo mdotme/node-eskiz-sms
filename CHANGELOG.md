@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.1](https://github.com/mdotme/node-eskiz-sms/compare/v1.4.0...v1.4.1) (2025-02-23)
+
+### Documentation
+
+* add uzbek readme ([c169bf4](https://github.com/mdotme/node-eskiz-sms/commit/c169bf45c501426634d797558516900b8d323ca7))
+
 ## [1.4.0](https://github.com/mdotme/node-eskiz-sms/compare/v1.3.0...v1.4.0) (2025-02-22)
 
 ### Features
